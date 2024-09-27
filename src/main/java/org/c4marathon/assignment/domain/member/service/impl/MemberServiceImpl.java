@@ -1,6 +1,7 @@
 package org.c4marathon.assignment.domain.member.service.impl;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.c4marathon.assignment.domain.member.dto.LoginHistoryDto;
 import org.c4marathon.assignment.domain.member.dto.request.LoginRequestDto;
@@ -71,6 +72,10 @@ public class MemberServiceImpl implements MemberService {
 		if (memberMapper.insertLoginHistory(loginHistoryDto) <= 0) {
 			throw new ExceptionModule(ExceptionInfo.UNKNOWN_ERROR, "아이디 : " + loginRequestDto.id() + ", 로그인 기록 생성 실패");
 		}
+
+		HttpSession session = request.getSession();
+		session.setAttribute("memberPk", loginResponseDto.memberPk());
+		session.setMaxInactiveInterval(60 * 60);
 
 		return loginResponseDto;
 	}
