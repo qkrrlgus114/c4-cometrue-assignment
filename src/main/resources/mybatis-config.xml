@@ -7,6 +7,10 @@
     <typeAliases>
         <typeAlias alias="SignUpRequestDto"
                    type="org.c4marathon.assignment.domain.member.dto.request.SignUpRequestDto"/>
+        <typeAlias alias="LoginHistoryDto"
+                   type="org.c4marathon.assignment.domain.member.dto.LoginHistoryDto"/>
+        <typeAlias alias="LoginResponseDto"
+                   type="org.c4marathon.assignment.domain.member.dto.response.LoginResponseDto"/>
 
         <!-- 패키지 전체에 대한 별칭 설정 -->
         <package name="org.c4marathon.assignment.domain.member.dto.request"/>

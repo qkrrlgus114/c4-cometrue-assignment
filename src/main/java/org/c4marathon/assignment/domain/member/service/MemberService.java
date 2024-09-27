@@ -1,12 +1,17 @@
 package org.c4marathon.assignment.domain.member.service;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.c4marathon.assignment.domain.member.dto.request.LoginRequestDto;
 import org.c4marathon.assignment.domain.member.dto.request.SignUpRequestDto;
+import org.c4marathon.assignment.domain.member.dto.response.LoginResponseDto;
 
 public interface MemberService {
 
 	// 회원가입
-	void signUp(HttpServletRequest request, SignUpRequestDto signUpRequestDto);
+	void signUp(SignUpRequestDto signUpRequestDto);
+
+	// 로그인
+	LoginResponseDto login(HttpServletRequest request, LoginRequestDto loginRequestDto);
 
 	// 아이디 중복체크
 	void isIdDuplicate(String id);

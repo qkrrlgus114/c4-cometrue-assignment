@@ -7,9 +7,16 @@
 
     <!-- 회원 정보 삽입 -->
     <insert id="insertMember" parameterType="SignUpRequestDto">
-        INSERT INTO member (id, password, email, phone_number, nickname, age, profile_image)
-        VALUES (#{id}, #{password}, #{email}, #{phoneNumber}, #{nickname}, #{age}, #{profileImage})
+        INSERT INTO member (id, password, email, phone_number, nickname, age, profile_image, regist_date)
+        VALUES (#{id}, #{password}, #{email}, #{phoneNumber}, #{nickname}, #{age}, #{profileImage}, #{registDate})
     </insert>
+
+    <!-- 로그인 -->
+    <select id="selectMember" parameterType="String" resultType="LoginResponseDto">
+        SELECT member_pk, id, password, email, phone_number, nickname, age, profile_image
+        FROM member
+        WHERE id = #{id}
+    </select>
 
     <!-- 아이디 중복체크 -->
     <select id="checkIdDuplicate" parameterType="String" resultType="int">
@@ -31,4 +38,9 @@
         SELECT COUNT(*) FROM member WHERE phone_number = #{phoneNumber}
     </select>
 
+    <!-- 로그인 히스토리 생성 -->
+    <insert id="insertLoginHistory" parameterType="LoginHistoryDto">
+        INSERT INTO login_history(member_pk, login_date, ip)
+        VALUES (#{memberPk}, #{loginDate}, #{ip})
+    </insert>
 </mapper>
