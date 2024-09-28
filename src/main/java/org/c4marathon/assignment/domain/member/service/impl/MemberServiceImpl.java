@@ -11,6 +11,7 @@ import org.c4marathon.assignment.domain.member.mapper.MemberMapper;
 import org.c4marathon.assignment.domain.member.service.MemberService;
 import org.c4marathon.assignment.global.exception.ExceptionModule;
 import org.c4marathon.assignment.global.exception.info.ExceptionInfo;
+import org.c4marathon.assignment.global.util.WordFilterUtil;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,10 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	public void signUp(final SignUpRequestDto signUpRequestDto) {
 		try {
+			if(WordFilterUtil.containsBannedWord(signUpRequestDto.getId()) || WordFilterUtil.containsBannedWord(signUpRequestDto.getNickname())){
+				throw new ExceptionModule(ExceptionInfo.BANNED_WORD_INPUT, "사용 불가능한 단어 포함");
+			}
+
 			SignUpRequestDto signUpDTO = SignUpRequestDto.builder()
 					.id(signUpRequestDto.getId())
 					.password(passwordEncoder.encode(signUpRequestDto.getPassword()))

@@ -17,6 +17,7 @@ public enum ExceptionInfo {
 	DUPLICATE_MEMBER_DATA(HttpStatus.CONFLICT, "M-006", "중복된 데이터가 존재합니다."),
 	NOT_MATCH_ID(HttpStatus.BAD_REQUEST, "M-007", "계정이 존재하지 않습니다."),
 	NOT_MATCH_PASSWORD(HttpStatus.BAD_REQUEST, "M-008", "비밀번호가 일치하지 않습니다."),
+	BANNED_WORD_INPUT(HttpStatus.BAD_REQUEST, "M-009", "사용 불가능한 단어가 포함되어 있습니다."),
 	UNKNOWN_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "M-999", "알 수 없는 에러가 발생했습니다. 관리자에게 문의 바랍니다.");
 
 	private HttpStatus httpStatus;

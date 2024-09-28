@@ -18,6 +18,8 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(ExceptionModule.class)
 	public ResponseEntity<ApiResponse<Void>> handleException(ExceptionModule e) {
+		log.warn(e.getLog());
+
 		return ResponseEntity.status(e.getExceptionInfo().getHttpStatus()).body(ApiResponse.createError(e.getExceptionInfo().getMessage()));
 	}
 
