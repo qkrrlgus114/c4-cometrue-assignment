@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.c4marathon.assignment.domain.member.mapper.MemberMapper">
+
+    <!-- 회원 정보 삽입 -->
+    <insert id="insertMember" parameterType="SignUpRequestDto">
+        INSERT INTO member (id, password, email, phone_number, nickname, age, profile_image, regist_date)
+        VALUES (#{id}, #{password}, #{email}, #{phoneNumber}, #{nickname}, #{age}, #{profileImage}, #{registDate})
+    </insert>
+
+    <!-- 로그인 -->
+    <select id="selectMember" parameterType="String" resultType="LoginResponseDto">
+        SELECT member_pk, id, password, email, phone_number, nickname, age, profile_image
+        FROM member
+        WHERE id = #{id}
+    </select>
+
+    <!-- 아이디 중복체크 -->
+    <select id="checkIdDuplicate" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM member WHERE id = #{id}
+    </select>
+
+    <!-- 이메일 중복체크 -->
+    <select id="checkEmailDuplicate" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM member WHERE email = #{email}
+    </select>
+
+    <!-- 닉네임 중복체크 -->
+    <select id="checkNicknameDuplicate" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM member WHERE nickname = #{nickname}
+    </select>
+
+    <!-- 휴대폰 번호 중복체크 -->
+    <select id="checkPhoneNumberDuplicate" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM member WHERE phone_number = #{phoneNumber}
+    </select>
+
+    <!-- 로그인 히스토리 생성 -->
+    <insert id="insertLoginHistory" parameterType="LoginHistoryDto">
+        INSERT INTO login_history(member_pk, login_date, ip)
+        VALUES (#{memberPk}, #{loginDate}, #{ip})
+    </insert>
+</mapper>

@@ -1,0 +1,2 @@
+INSERT INTO member(id, password, email, phone_number, nickname, age, profile_image, regist_date)
+VALUES ('qkrrlgus114', '1234', 'test@naver.com', '010-8615-6570', '박기현', 28, 'http://default.url', NOW());
